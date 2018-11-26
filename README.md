@@ -27,5 +27,8 @@ Bus 001 Device 004: ID 077d:0410 Griffin Technology PowerMate
 $ 
 ```
 
+Then run with:
+
+```
 sudo docker run --volume="/dev/bus/usb:/dev/bus/usb" "${LOGNAME}/roon-extension-powermate"
 ```
