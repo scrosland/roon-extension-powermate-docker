@@ -30,5 +30,5 @@ $
 Then run with:
 
 ```
-sudo docker run --detach --network=host --restart=unless-stopped --volume=extensions:/app/extensions --volume=/dev/bus/usb:/dev/bus/usb "${LOGNAME}/roon-extension-powermate"
+sudo docker run --detach --network=host --name=powermate --restart=unless-stopped --volume=/dev/bus/usb:/dev/bus/usb "${LOGNAME}/roon-extension-powermate"
 ```
