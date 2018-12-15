@@ -1,9 +1,16 @@
 # roon-extension-powermate-docker
 Docker image for https://github.com/RoonLabs/roon-extension-powermate.
 
-## WARNING
+## Using pre-built images from Docker hub
 
-**This Dockerfile will build an image, but that image is not yet tested. Use at your own risk.**
+There is a pre-built image on [Docker hub][] for Raspberry Pi 3 devices, and possibly other ARM systems. To use this:
+```
+$ sudo docker pull scrosland/roon-extension-powermate
+$ lsusb -d 077d:0410    # note down the Bus and Device values
+Bus 001 Device 004: ID 077d:0410 Griffin Technology PowerMate
+$ sudo docker run --detach --name=powermate --network=host --restart=unless-stopped --device=/dev/bus/usb/001/004 scrosland/roon-extension-powermate
+```
+[Docker hub]: https://hub.docker.com/r/scrosland/roon-extension-powermate
 
 ## Build
 
@@ -12,7 +19,7 @@ If you wish to build an image from the Dockerfile, use something like:
 ```
 git clone https://github.com/scrosland/roon-extension-powermate-docker
 cd roon-extension-powermate-docker
-sudo docker build -t "${LOGNAME}/roon-extension-powermate" .
+sudo docker build -t roon-extension-powermate .
 ```
 
 Expect warnings about deprecated APIs from the compilation of the native node-hid code.
@@ -27,8 +34,8 @@ Bus 001 Device 004: ID 077d:0410 Griffin Technology PowerMate
 $ 
 ```
 
-Then run with:
+Note down the Bus and Device values and then run with:
 
 ```
-sudo docker run --detach --network=host --name=powermate --restart=unless-stopped --volume=/dev/bus/usb:/dev/bus/usb "${LOGNAME}/roon-extension-powermate"
+sudo docker run --detach --network=host --name=powermate --restart=unless-stopped --device=/dev/bus/usb/001/004 roon-extension-powermate
 ```
